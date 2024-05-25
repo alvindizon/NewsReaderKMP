@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -56,5 +57,21 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+
+publishing {
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/alvindizon/newsreaderkmp")
+            credentials {
+                username = properties.getProperty("github.user")
+                password = properties.getProperty("github.token")
+            }
+        }
     }
 }
