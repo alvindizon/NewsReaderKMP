@@ -4,7 +4,13 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinxSerialization)
+    id("maven-publish")
 }
+
+val VERSION = project.property("LIBRARY_VERSION") as String
+
+version = VERSION
+group = "com.alvindizon.newsreaderkmp"
 
 kotlin {
     androidTarget {
@@ -13,6 +19,7 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+        publishAllLibraryVariants()
     }
     
     val xcf = XCFramework()
