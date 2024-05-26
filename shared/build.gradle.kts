@@ -23,14 +23,14 @@ kotlin {
         publishAllLibraryVariants()
     }
     
-    val xcf = XCFramework()
+    val xcf = XCFramework("NewsReaderKMP")
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "NewsReaderKMP"
             xcf.add(this)
             isStatic = true
         }
